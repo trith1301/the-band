@@ -1,4 +1,4 @@
-import { Show, BandMember } from './types';
+import { Show, BandMember, ShowTickets } from './types';
 
 export const SHOWS: Show[] = [
   {
@@ -42,5 +42,24 @@ export const BAND_MEMBERS: BandMember[] = [
   {
     name: 'Jukka Koskinen',
     avatar: '/assets/img/band-members/jukka-koskinen.png',
+  },
+];
+
+export const SHOW_TICKETS: ShowTickets[] = [
+  {
+    month: 'September',
+    available: 0,
+  },
+  {
+    month: 'October',
+    available: 3,
+  },
+  {
+    month: 'June',
+    available: 0,
+  },
+  {
+    month: 'July',
+    available: 2,
   },
 ];
