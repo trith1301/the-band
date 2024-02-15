@@ -1,4 +1,4 @@
-import { Show, BandMember, ShowTickets } from './types';
+import { Show, BandMember, ShowTickets, TicketDates } from './types';
 
 export const SHOWS: Show[] = [
   {
@@ -61,5 +61,32 @@ export const SHOW_TICKETS: ShowTickets[] = [
   {
     month: 'July',
     available: 2,
+  },
+];
+
+export const TICKET_DATES: TicketDates[] = [
+  {
+    place: 'New York',
+    date: 'Fri 27 Nov 2016',
+    description: 'Praesent tincidunt sed tellus ut rutrum sed vitae justo.',
+    thumbnail: '/assets/img/tickets-date/new-york.jpeg',
+  },
+  {
+    place: 'Paris',
+    date: 'Sat 28 Nov 2016',
+    description: 'Praesent tincidunt sed tellus ut rutrum sed vitae justo.',
+    thumbnail: '/assets/img/tickets-date/paris.jpeg',
+  },
+  {
+    place: 'Paris',
+    date: 'Sat 28 Nov 2016',
+    description: 'Praesent tincidunt sed tellus ut rutrum sed vitae justo.',
+    thumbnail: '/assets/img/tickets-date/paris.jpeg',
+  },
+  {
+    place: 'San Francisco',
+    date: 'Sun 29 Nov 2016',
+    description: 'Praesent tincidunt sed tellus ut rutrum sed vitae justo.',
+    thumbnail: '/assets/img/tickets-date/san-francisco.jpeg',
   },
 ];

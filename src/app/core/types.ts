@@ -13,3 +13,10 @@ export type ShowTickets = {
   month: string | null;
   available: number;
 };
+
+export type TicketDates = {
+  place: string | null;
+  date: string | null;
+  description: string | null;
+  thumbnail: string | null;
+}

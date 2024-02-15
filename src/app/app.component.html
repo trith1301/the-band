@@ -73,5 +73,46 @@
       </li>
       }
     </ul>
+    <ul class="tour-info-tickets">
+      @for (ticketDate of ticketDates; track $index) {
+      <li class="tickets-item">
+        <img
+          class="thumbnail"
+          [src]="ticketDate.thumbnail"
+          [alt]="ticketDate.place"
+        />
+        <div class="text">
+          <p class="place">{{ ticketDate.place }}</p>
+          <span class="date">{{ ticketDate.date }}</span>
+          <p class="description">
+            {{ ticketDate.description }}
+          </p>
+          <button
+            (click)="toggleModal()"
+            class="buy-ticket-button"
+            type="button"
+          >
+            Buy Tickets
+          </button>
+        </div>
+      </li>
+      }
+    </ul>
+  </div>
+</div>
+
+<div id="myModal" class="modal" #modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span (click)="toggleModal()" class="close">&times;</span>
+      <h2>Tickets</h2>
+    </div>
+    <div class="modal-body">
+      <p>Some text in the Modal Body</p>
+      <p>Some other text...</p>
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
   </div>
 </div>

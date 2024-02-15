@@ -90,7 +90,6 @@
 
   &-members {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
 
     padding-top: 32px;
     padding-bottom: 32px;
@@ -115,6 +114,10 @@
 
         border-radius: 4px;
       }
+    }
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(1, 1fr);
     }
 
     @include respond-to(md) {
@@ -197,6 +200,79 @@
 
     .sold-out {
       justify-content: flex-start;
+    }
+  }
+
+  &-tickets {
+    display: grid;
+    gap: 16px;
+
+    padding-top: 32px;
+    padding-bottom: 32px;
+
+    .tickets-item {
+      width: 100%;
+
+      background-color: map-get($colors, background-0);
+
+      .thumbnail {
+        width: 100%;
+      }
+
+      .text {
+        padding-left: 16px;
+        padding-right: 16px;
+
+        font-size: 15px;
+
+        .place {
+          margin-top: 15px;
+          margin-bottom: 15px;
+        }
+
+        .date {
+          opacity: 0.6;
+
+          margin-top: 15px;
+          margin-bottom: 15px;
+        }
+
+        .description {
+          margin-top: 15px;
+          margin-bottom: 15px;
+        }
+
+        .buy-ticket-button {
+          cursor: pointer;
+
+          padding: 8px 16px;
+
+          border: none;
+
+          outline: none;
+
+          margin-bottom: 16px;
+
+          color: map-get($colors, text-0);
+          background-color: map-get($colors, background-1);
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+
+    @include respond-to(xs) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(lg) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }
