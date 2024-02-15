@@ -1,5 +1,5 @@
 import { PLATFORM_ID, OnInit, Inject, Component } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 import Swiper from 'swiper';
 import { Autoplay } from 'swiper/modules';
@@ -7,10 +7,10 @@ import 'swiper/css';
 
 import { HeaderComponent } from './components/header/header.component';
 
-import { Show, BandMember } from './core/types';
-import { SHOWS, BAND_MEMBERS } from './core/data';
+import { Show, BandMember, ShowTickets } from './core/types';
+import { SHOWS, BAND_MEMBERS, SHOW_TICKETS } from './core/data';
 
-const imports = [HeaderComponent];
+const imports = [CommonModule, HeaderComponent];
 
 @Component({
   selector: 'the-band-root',
@@ -22,12 +22,14 @@ const imports = [HeaderComponent];
 export class AppComponent implements OnInit {
   shows: Show[] = [];
   bandMembers: BandMember[] = [];
+  showTickets: ShowTickets[] = [];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
     this.shows = SHOWS;
     this.bandMembers = BAND_MEMBERS;
+    this.showTickets = SHOW_TICKETS;
 
     if (isPlatformBrowser(this.platformId)) {
       this.mountCarousel('.shows-carousel');
