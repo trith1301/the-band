@@ -48,5 +48,30 @@
 </div>
 
 <div id="tour" class="tour-info">
-  <div class="container"></div>
+  <div class="container">
+    <h2 class="tour-info-title">Tour Dates</h2>
+    <p class="tour-info-slogan">Remember to book your tickets!</p>
+    <br />
+    <ul class="tour-info-calendar">
+      @for (showTicket of showTickets; track $index) {
+      <li
+        [ngClass]="{
+          'calendar-item': true,
+          'available': showTicket.available,
+          'sold-out': !showTicket.available,
+        }"
+      >
+        <span class="calendar-item-date">{{ showTicket.month }}</span>
+        <span
+          [ngClass]="{
+          'available': showTicket.available,
+          'sold-out': !showTicket.available,
+        }"
+        >
+          {{ showTicket.available || "Sold out" }}
+        </span>
+      </li>
+      }
+    </ul>
+  </div>
 </div>

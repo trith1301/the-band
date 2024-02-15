@@ -65,6 +65,8 @@
     letter-spacing: 4px;
     text-transform: uppercase;
     font-weight: map-get($font-weights, semi-bold);
+
+    color: map-get($colors, text-1);
   }
 
   &-slogan {
@@ -75,6 +77,8 @@
 
     font-style: italic;
     text-align: center;
+
+    color: map-get($colors, text-1);
   }
 
   &-desc {
@@ -86,8 +90,10 @@
 
   &-members {
     display: grid;
-    row-gap: 30px;
     grid-template-columns: repeat(1, 1fr);
+
+    padding-top: 32px;
+    padding-bottom: 32px;
 
     .band-member {
       &-name {
@@ -103,7 +109,9 @@
 
         width: 60%;
 
-        margin: 0 auto;
+        margin-bottom: 16px;
+        margin-left: auto;
+        margin-right: auto;
 
         border-radius: 4px;
       }
@@ -121,4 +129,74 @@
 
 .tour-info {
   background-color: map-get($colors, background-1);
+
+  &-title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: map-get($font-weights, semi-bold);
+
+    color: map-get($colors, text-0);
+  }
+
+  &-slogan {
+    opacity: 0.6;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    font-style: italic;
+    text-align: center;
+
+    color: map-get($colors, text-0);
+  }
+
+  &-calendar {
+    .calendar-item {
+      display: flex;
+      align-items: center;
+
+      padding: 8px 16px;
+
+      background-color: map-get($colors, background-0);
+
+      .available {
+        margin-right: 16px;
+
+        padding-left: 8px;
+        padding-right: 8px;
+
+        border-radius: 50%;
+
+        color: map-get($colors, text-0);
+        background-color: map-get($colors, background-1);
+      }
+
+      .sold-out {
+        margin-left: 16px;
+
+        padding-left: 8px;
+        padding-right: 8px;
+
+        color: map-get($colors, text-0);
+        background-color: #f44336;
+      }
+    }
+
+    .calendar-item:not(:last-child) {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .available {
+      justify-content: space-between;
+    }
+
+    .sold-out {
+      justify-content: flex-start;
+    }
+  }
 }
