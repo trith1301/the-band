@@ -1,4 +1,11 @@
-import { PLATFORM_ID, OnInit, Inject, Component } from '@angular/core';
+import {
+  PLATFORM_ID,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Inject,
+  Component,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 import Swiper from 'swiper';
@@ -6,8 +13,8 @@ import { Autoplay } from 'swiper/modules';
 
 import { HeaderComponent } from './components/header/header.component';
 
-import { Show, BandMember, ShowTickets } from './core/types';
-import { SHOWS, BAND_MEMBERS, SHOW_TICKETS } from './core/data';
+import { Show, BandMember, ShowTickets, TicketDates } from './core/types';
+import { SHOWS, BAND_MEMBERS, SHOW_TICKETS, TICKET_DATES } from './core/data';
 
 const imports = [CommonModule, HeaderComponent];
 
@@ -22,6 +29,9 @@ export class AppComponent implements OnInit {
   shows: Show[] = [];
   bandMembers: BandMember[] = [];
   showTickets: ShowTickets[] = [];
+  ticketDates: TicketDates[] = [];
+
+  @ViewChild('modal', { static: true }) modal!: ElementRef;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -29,9 +39,16 @@ export class AppComponent implements OnInit {
     this.shows = SHOWS;
     this.bandMembers = BAND_MEMBERS;
     this.showTickets = SHOW_TICKETS;
+    this.ticketDates = TICKET_DATES;
 
     if (isPlatformBrowser(this.platformId)) {
       this.mountCarousel('.shows-carousel');
+
+      window.addEventListener('click', (event) => {
+        if (event.target == this.modal.nativeElement) {
+          this.toggleModal();
+        }
+      });
     }
   }
 
@@ -45,5 +62,17 @@ export class AppComponent implements OnInit {
       },
       modules: [Autoplay],
     });
+  }
+
+  /** Only call when current platform is browser */
+  toggleModal() {
+    const modal = this.modal.nativeElement;
+    const display = modal.style.display;
+
+    if (display === 'none' || display === '') {
+      modal.style.display = 'block';
+    } else {
+      modal.style.display = 'none';
+    }
   }
 }
