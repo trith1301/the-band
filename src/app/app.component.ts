@@ -3,7 +3,6 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 import Swiper from 'swiper';
 import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
 
 import { HeaderComponent } from './components/header/header.component';
 
