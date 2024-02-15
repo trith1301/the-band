@@ -1,0 +1,25 @@
+@if (isMobile()) {
+<the-band-mobile-header></the-band-mobile-header>
+} @else {
+<header class="header">
+  <nav class="navbar">
+    <ul class="navbar-menu">
+      <li class="navbar-menu-item"><a href="#home">Home</a></li>
+      <li class="navbar-menu-item"><a href="#band">Band</a></li>
+      <li class="navbar-menu-item"><a href="#tour">Tour</a></li>
+      <li class="navbar-menu-item"><a href="#contact">Contact</a></li>
+      <li class="navbar-menu-item navbar-menu-dropdown">
+        <a href="#more">More&nbsp;<i class="bx bxs-down-arrow"></i></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-menu-item"><a href="#home">Merchandise</a></li>
+          <li class="dropdown-menu-item"><a href="#band">Extras</a></li>
+          <li class="dropdown-menu-item"><a href="#tour">Media</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <button class="search-button" type="button">
+    <i class="bx bx-search"></i>
+  </button>
+</header>
+}

@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&-display=swap");
+
+$breakpoints: (
+  xs: 0px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+$font-weights: (
+  thin: 300,
+  normal: 400,
+  semi-bold: 500,
+  bold: 600,
+  bolder: 700,
+  extraBold: 800,
+);
+
+$colors: (
+  background-0: #faf5ff,
+  background-1: #171717,
+
+  text-0: #faf5ff,
+  text-1: #171717,
+);
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @error "Breakpoint '#{$breakpoint}' does not exist!";
+  }
+}
+
+* {
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  scroll-behavior: smooth;
+
+  font-style: normal;
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
+  font-family: "Open Sans", sans-serif;
+  font-weight: map-get($font-weights, normal);
+
+  color: map-get($colors, text-1);
+}
+
+body {
+  background-color: map-get($colors, background-0);
+}
+
+.container {
+  max-width: 800px;
+
+  margin: 0 auto;
+
+  padding: 64px 16px;
+}

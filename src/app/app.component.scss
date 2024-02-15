@@ -1,0 +1,124 @@
+@import "../../src/styles.scss";
+
+.shows-carousel {
+  .show-slide {
+    position: relative;
+
+    width: 100%;
+
+    &-image {
+      width: 100%;
+
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    &-content {
+      position: absolute;
+      bottom: 0;
+
+      width: 100%;
+
+      padding-top: 32px;
+      padding-bottom: 32px;
+
+      text-align: center;
+
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 100%
+      );
+
+      * {
+        color: map-get($colors, text-0);
+      }
+
+      h3 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        font-size: 24px;
+      }
+
+      p {
+        margin-top: 15px;
+        margin-bottom: 15px;
+
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.band-info {
+  background-color: map-get($colors, background-0);
+
+  &-title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: map-get($font-weights, semi-bold);
+  }
+
+  &-slogan {
+    opacity: 0.6;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    font-style: italic;
+    text-align: center;
+  }
+
+  &-desc {
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    text-align: justify;
+  }
+
+  &-members {
+    display: grid;
+    row-gap: 30px;
+    grid-template-columns: repeat(1, 1fr);
+
+    .band-member {
+      &-name {
+        margin-top: 15px;
+        margin-bottom: 15px;
+
+        font-size: 15px;
+        text-align: center;
+      }
+
+      &-avatar {
+        display: block;
+
+        width: 60%;
+
+        margin: 0 auto;
+
+        border-radius: 4px;
+      }
+    }
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+.tour-info {
+  background-color: map-get($colors, background-1);
+}

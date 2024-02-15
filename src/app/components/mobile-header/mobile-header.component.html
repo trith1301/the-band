@@ -1,0 +1,25 @@
+<header class="header">
+  <a class="home" href="#home">Home</a>
+  @if (isShowMenu) {
+  <ul class="nav-menu">
+    <li class="nav-menu-item"><a href="#band">Band</a></li>
+    <li class="nav-menu-item"><a href="#tour">Tour</a></li>
+    <li class="nav-menu-item"><a href="#contact">Contact</a></li>
+    <li class="nav-menu-item"><a href="#">Merchandise</a></li>
+    <li class="nav-menu-item"><a href="#">Extras</a></li>
+    <li class="nav-menu-item"><a href="#">Media</a></li>
+    <li class="nav-menu-item nav-menu-search">
+      <button type="button">
+        <i class="bx bx-search"></i>&nbsp; Search...
+      </button>
+    </li>
+  </ul>
+  }
+  <button (click)="toggleMenu()" class="toggle-menu">
+    @if (isShowMenu) {
+    <i class="bx bx-x"></i>
+    } @else {
+    <i class="bx bx-menu"></i>
+    }
+  </button>
+</header>

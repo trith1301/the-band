@@ -1,0 +1,134 @@
+@import "../../../styles.scss";
+
+.header {
+  z-index: 2;
+  
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: map-get($colors, background-1);
+
+  height: 50px;
+
+  .navbar {
+    height: 100%;
+
+    &-menu {
+      display: flex;
+
+      height: 100%;
+
+      list-style-type: none;
+
+      &-item > a {
+        display: flex;
+        align-items: center;
+
+        height: 100%;
+
+        padding-left: 24px;
+        padding-right: 24px;
+
+        font-size: 15px;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        color: map-get($colors, text-0);
+
+        i {
+          font-size: 10px;
+
+          color: map-get($colors, text-0);
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          color: map-get($colors, text-1);
+
+          i {
+            color: map-get($colors, text-1);
+          }
+
+          background-color: map-get($colors, background-0);
+        }
+      }
+
+      &-dropdown {
+        position: relative;
+
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+
+          display: none;
+
+          min-width: 160px;
+
+          list-style-type: none;
+
+          background-color: map-get($colors, background-0);
+
+          box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2),
+            0 4px 20px 0 rgba(0, 0, 0, 0.19);
+
+          &-item > a {
+            display: block;
+
+            padding: 10px 24px;
+
+            font-size: 15px;
+            text-decoration: none;
+
+            color: map-get($colors, text-1);
+
+            &:hover {
+              color: map-get($colors, text-0);
+
+              background-color: map-get($colors, background-1);
+            }
+          }
+        }
+
+        &:hover {
+          .dropdown-menu {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .search-button {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+
+    cursor: pointer;
+
+    padding-left: 24px;
+    padding-right: 24px;
+
+    border: unset;
+
+    outline: unset;
+
+    background-color: unset;
+
+    i {
+      font-size: 18px;
+
+      color: map-get($colors, text-0);
+    }
+
+    &:hover {
+      background-color: #f44336;
+    }
+  }
+}
