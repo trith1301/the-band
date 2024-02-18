@@ -2,6 +2,8 @@
 
 ## Information
 
+Visit live preview [here](https://the-band-kohl.vercel.app).
+
 ### About
 
 This is a personal project.
