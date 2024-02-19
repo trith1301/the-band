@@ -13,11 +13,12 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 import { Show, BandMember, ShowTickets, TicketDates } from './core/types';
 import { SHOWS, BAND_MEMBERS, SHOW_TICKETS, TICKET_DATES } from './core/data';
 
-const imports = [CommonModule, HeaderComponent];
+const imports = [CommonModule, HeaderComponent, FooterComponent];
 
 @Component({
   selector: 'the-band-root',
