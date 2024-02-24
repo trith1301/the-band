@@ -27,6 +27,7 @@ import { NotificationService } from './services/notification/notification.servic
 
 import { Show, BandMember, ShowTickets, TicketDates } from './core/types';
 import { NOTIFICATION_TYPES } from './core/enums';
+import { MAX_Z_INDEX } from './core/constants';
 import { SHOWS, BAND_MEMBERS, SHOW_TICKETS, TICKET_DATES } from './core/data';
 
 const imports = [
@@ -48,6 +49,7 @@ const imports = [
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  zIndex: number = 0;
   loading: boolean = false;
   shows: Show[] = [];
   bandMembers: BandMember[] = [];
@@ -71,9 +73,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loading = true;
     this.notificationService.setup({ color: 'red' });
 
+    this.zIndex = MAX_Z_INDEX - 1;
     this.shows = SHOWS;
     this.bandMembers = BAND_MEMBERS;
     this.showTickets = SHOW_TICKETS;
@@ -88,10 +90,6 @@ export class AppComponent implements OnInit {
         }
       });
     }
-
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
   }
 
   /** Only call when current platform is browser */
@@ -113,22 +111,11 @@ export class AppComponent implements OnInit {
 
     if (display === 'none' || display === '') {
       modal.style.display = 'block';
+      document.body.style.overflowY = 'hidden';
     } else {
       modal.style.display = 'none';
+      document.body.style.overflowY = 'auto';
     }
-  }
-
-  toggleErrors(control: string): boolean | undefined {
-    const validations = {
-      quantity:
-        this.ticketBookerModalForm.get('quantity')?.dirty &&
-        this.ticketBookerModalForm.get('quantity')?.invalid,
-      email:
-        this.ticketBookerModalForm.get('email')?.dirty &&
-        this.ticketBookerModalForm.get('email')?.invalid,
-    };
-
-    return validations[control as keyof typeof validations];
   }
 
   submitTicketBooker() {
@@ -140,6 +127,7 @@ export class AppComponent implements OnInit {
           'Successfully submitted!'
         );
         this.ticketBookerModalForm.reset();
+        this.toggleModal();
         this.loading = false;
       }, 2000);
     } else if (isPlatformBrowser(this.platformId)) {

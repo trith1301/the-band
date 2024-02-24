@@ -12,7 +12,7 @@ export class NotificationService {
     title: 'Notification',
     color: '#faf5ff',
     position: 'top',
-    duration: 1200,
+    duration: 1800,
     closeBtn: false,
     append: false,
   };
