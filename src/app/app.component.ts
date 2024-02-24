@@ -26,7 +26,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotificationService } from './services/notification/notification.service';
 
 import { Show, BandMember, ShowTickets, TicketDates } from './core/types';
-import { NOTIFICATION_TYPES } from './core/enums';
+import { NOTIFICATION_TYPES, NOTIFICATION_MESSAGES } from './core/enums';
 import { MAX_Z_INDEX } from './core/constants';
 import { SHOWS, BAND_MEMBERS, SHOW_TICKETS, TICKET_DATES } from './core/data';
 
@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
       setTimeout(() => {
         this.notificationService.push(
           NOTIFICATION_TYPES.SUCCESS,
-          'Successfully submitted!'
+          NOTIFICATION_MESSAGES.SUCCESS
         );
         this.contactForm.reset();
         this.loading = false;
@@ -124,9 +124,18 @@ export class AppComponent implements OnInit {
       for (let control in this.contactForm.controls) {
         if (this.contactForm.get(control)?.invalid) {
           document.getElementById(`contact-${control}`)?.focus();
+
+          if (control === 'email') {
+            this.notificationService.push(
+              NOTIFICATION_TYPES.ERROR,
+              NOTIFICATION_MESSAGES.INVALID_EMAIL
+            );
+            break;
+          }
+
           this.notificationService.push(
             NOTIFICATION_TYPES.ERROR,
-            `Please fill out the focused field!`
+            NOTIFICATION_MESSAGES.REQUIRED
           );
           break;
         }
@@ -154,7 +163,7 @@ export class AppComponent implements OnInit {
       setTimeout(() => {
         this.notificationService.push(
           NOTIFICATION_TYPES.SUCCESS,
-          'Successfully submitted!'
+          NOTIFICATION_MESSAGES.SUCCESS
         );
         this.ticketBookerModalForm.reset();
         this.toggleModal();
@@ -166,7 +175,7 @@ export class AppComponent implements OnInit {
           document.getElementById(`${control}`)?.focus();
           this.notificationService.push(
             NOTIFICATION_TYPES.ERROR,
-            `Please fill out the focused field!`
+            NOTIFICATION_MESSAGES.REQUIRED
           );
           break;
         }

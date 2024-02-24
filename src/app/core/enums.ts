@@ -14,3 +14,9 @@ export enum NOTIFICATION_TYPES {
   SUCCESS = 'success',
   CREATE = 'create',
 }
+
+export enum NOTIFICATION_MESSAGES {
+  SUCCESS = 'Successfully!',
+  REQUIRED = 'Please fill out the focused field!',
+  INVALID_EMAIL = 'Please enter a valid email address!',
+}
