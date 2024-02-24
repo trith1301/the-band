@@ -56,6 +56,11 @@ export class AppComponent implements OnInit {
   showTickets: ShowTickets[] = [];
   ticketDates: TicketDates[] = [];
 
+  contactForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    message: new FormControl('', [Validators.required]),
+  });
   ticketBookerModalForm = new FormGroup({
     quantity: new FormControl(null, [
       Validators.required,
@@ -104,6 +109,31 @@ export class AppComponent implements OnInit {
     });
   }
 
+  submitContactForm() {
+    if (this.contactForm.valid) {
+      this.loading = true;
+      setTimeout(() => {
+        this.notificationService.push(
+          NOTIFICATION_TYPES.SUCCESS,
+          'Successfully submitted!'
+        );
+        this.contactForm.reset();
+        this.loading = false;
+      }, 2000);
+    } else if (isPlatformBrowser(this.platformId)) {
+      for (let control in this.contactForm.controls) {
+        if (this.contactForm.get(control)?.invalid) {
+          document.getElementById(`contact-${control}`)?.focus();
+          this.notificationService.push(
+            NOTIFICATION_TYPES.ERROR,
+            `Please fill out the focused field!`
+          );
+          break;
+        }
+      }
+    }
+  }
+
   /** Only call when current platform is browser */
   toggleModal() {
     const modal = this.modal.nativeElement;
@@ -134,6 +164,10 @@ export class AppComponent implements OnInit {
       for (let control in this.ticketBookerModalForm.controls) {
         if (this.ticketBookerModalForm.get(control)?.invalid) {
           document.getElementById(`${control}`)?.focus();
+          this.notificationService.push(
+            NOTIFICATION_TYPES.ERROR,
+            `Please fill out the focused field!`
+          );
           break;
         }
       }

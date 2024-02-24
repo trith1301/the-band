@@ -17,10 +17,8 @@ export class NotificationService {
     append: false,
   };
 
-  constructor() {}
-
   setup(customOptions: any) {
-    this.options = Object.assign({}, this.options, customOptions);
+    this.options = { ...this.options, ...customOptions };
   }
 
   push(type: NOTIFICATION_TYPES, message: string) {

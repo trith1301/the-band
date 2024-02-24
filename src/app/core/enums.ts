@@ -10,7 +10,7 @@ export enum NOTIFICATION_TYPES {
   SYSTEM = 'system',
   INFO = 'info',
   WARNING = 'warning',
-  ERROR = 'error ',
+  ERROR = 'error',
   SUCCESS = 'success',
   CREATE = 'create',
 }
