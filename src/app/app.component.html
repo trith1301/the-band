@@ -103,6 +103,8 @@
 
 <the-band-footer />
 
+<the-band-spinner [hidden]="!loading" />
+
 <div id="myModal" class="modal" #modal>
   <div class="modal-content">
     <div class="modal-header">
@@ -127,6 +129,15 @@
             type="number"
             placeholder="How many?"
           />
+          <p
+            *ngIf="
+              ticketBookerModalForm.get('quantity')?.dirty &&
+              ticketBookerModalForm.get('quantity')?.invalid
+            "
+            class="error"
+          >
+            Please enter a valid quantity, at least 1 and not over 15
+          </p>
         </div>
         <div class="modal-body-form-group">
           <label class="label" for="email"
@@ -139,6 +150,15 @@
             type="email"
             placeholder="Enter email"
           />
+          <p
+            *ngIf="
+              ticketBookerModalForm.get('email')?.dirty &&
+              ticketBookerModalForm.get('email')?.invalid
+            "
+            class="error"
+          >
+            Please enter a valid email
+          </p>
         </div>
         <button class="modal-body-form-submit" type="submit">
           Pay <i class="bx bx-check"></i>

@@ -1,3 +1,5 @@
+import { NOTIFICATION_TYPES } from './enums';
+
 export type Show = {
   title: string | null;
   description: string | null;
@@ -19,4 +21,4 @@ export type TicketDates = {
   date: string | null;
   description: string | null;
   thumbnail: string | null;
-}
+};

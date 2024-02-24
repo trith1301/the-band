@@ -21,8 +21,12 @@ import 'swiper/css';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+
+import { NotificationService } from './services/notification/notification.service';
 
 import { Show, BandMember, ShowTickets, TicketDates } from './core/types';
+import { NOTIFICATION_TYPES } from './core/enums';
 import { SHOWS, BAND_MEMBERS, SHOW_TICKETS, TICKET_DATES } from './core/data';
 
 const imports = [
@@ -33,6 +37,7 @@ const imports = [
   // Components
   HeaderComponent,
   FooterComponent,
+  SpinnerComponent,
 ];
 
 @Component({
@@ -43,6 +48,7 @@ const imports = [
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  loading: boolean = false;
   shows: Show[] = [];
   bandMembers: BandMember[] = [];
   showTickets: ShowTickets[] = [];
@@ -54,14 +60,20 @@ export class AppComponent implements OnInit {
       Validators.min(1),
       Validators.max(15),
     ]),
-    email: new FormControl(''),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   @ViewChild('modal', { static: true }) modal!: ElementRef;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
+    this.loading = true;
+    this.notificationService.setup({ color: 'red' });
+
     this.shows = SHOWS;
     this.bandMembers = BAND_MEMBERS;
     this.showTickets = SHOW_TICKETS;
@@ -76,6 +88,10 @@ export class AppComponent implements OnInit {
         }
       });
     }
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
   }
 
   /** Only call when current platform is browser */
@@ -102,7 +118,37 @@ export class AppComponent implements OnInit {
     }
   }
 
+  toggleErrors(control: string): boolean | undefined {
+    const validations = {
+      quantity:
+        this.ticketBookerModalForm.get('quantity')?.dirty &&
+        this.ticketBookerModalForm.get('quantity')?.invalid,
+      email:
+        this.ticketBookerModalForm.get('email')?.dirty &&
+        this.ticketBookerModalForm.get('email')?.invalid,
+    };
+
+    return validations[control as keyof typeof validations];
+  }
+
   submitTicketBooker() {
-    console.log(this.ticketBookerModalForm.get('quantity')?.valid);
+    if (this.ticketBookerModalForm.valid) {
+      this.loading = true;
+      setTimeout(() => {
+        this.notificationService.push(
+          NOTIFICATION_TYPES.SUCCESS,
+          'Successfully submitted!'
+        );
+        this.ticketBookerModalForm.reset();
+        this.loading = false;
+      }, 2000);
+    } else if (isPlatformBrowser(this.platformId)) {
+      for (let control in this.ticketBookerModalForm.controls) {
+        if (this.ticketBookerModalForm.get(control)?.invalid) {
+          document.getElementById(`${control}`)?.focus();
+          break;
+        }
+      }
+    }
   }
 }

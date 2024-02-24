@@ -74,15 +74,29 @@ body {
   left: 0;
   top: 0;
 
-  // display: none;
+  display: none;
 
   width: 100%;
   height: 100%;
 
-  padding-top: 100px;
-
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
+
+  @include respond-to(xs) {
+    padding-top: 50px;
+  }
+
+  @include respond-to(sm) {
+    padding-top: 50px;
+  }
+
+  @include respond-to(md) {
+    padding-top: 50px;
+  }
+
+  @include respond-to(lg) {
+    padding-top: 100px;
+  }
 }
 
 .modal-content {
@@ -194,6 +208,14 @@ body {
         &:focus-visible {
           outline: -webkit-focus-ring-color auto 1px;
         }
+      }
+
+      .error {
+        margin-top: 5px;
+
+        font-size: 14px;
+
+        color: #f44336;
       }
 
       // Hide controls for type Number Inputs
@@ -320,4 +342,12 @@ body {
     opacity: 1;
     top: 0;
   }
+}
+
+p.br-toast-message {
+  color: map-get($colors, text-0);
+}
+
+p.br-toast-title {
+  color: map-get($colors, text-0);
 }
