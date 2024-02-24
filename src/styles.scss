@@ -210,6 +210,14 @@ body {
         }
       }
 
+      .error {
+        margin-top: 5px;
+
+        font-size: 14px;
+
+        color: #f44336;
+      }
+
       // Hide controls for type Number Inputs
       .input[type="number"] {
         /* Firefox */
@@ -334,4 +342,12 @@ body {
     opacity: 1;
     top: 0;
   }
+}
+
+p.br-toast-message {
+  color: map-get($colors, text-0);
+}
+
+p.br-toast-title {
+  color: map-get($colors, text-0);
 }
