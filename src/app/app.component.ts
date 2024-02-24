@@ -26,6 +26,7 @@ import { NotificationService } from './services/notification/notification.servic
 
 import { Show, BandMember, ShowTickets, TicketDates } from './core/types';
 import { NOTIFICATION_TYPES } from './core/enums';
+import { MAX_Z_INDEX } from './core/constants';
 import { SHOWS, BAND_MEMBERS, SHOW_TICKETS, TICKET_DATES } from './core/data';
 
 const imports = [
@@ -47,12 +48,18 @@ const imports = [
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  zIndex: number = 0;
   loading: boolean = false;
   shows: Show[] = [];
   bandMembers: BandMember[] = [];
   showTickets: ShowTickets[] = [];
   ticketDates: TicketDates[] = [];
 
+  contactForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    message: new FormControl('', [Validators.required]),
+  });
   ticketBookerModalForm = new FormGroup({
     quantity: new FormControl(null, [
       Validators.required,
@@ -70,9 +77,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loading = true;
     this.notificationService.setup({ color: 'red' });
 
+    this.zIndex = MAX_Z_INDEX - 1;
     this.shows = SHOWS;
     this.bandMembers = BAND_MEMBERS;
     this.showTickets = SHOW_TICKETS;
@@ -87,10 +94,6 @@ export class AppComponent implements OnInit {
         }
       });
     }
-
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
   }
 
   /** Only call when current platform is browser */
@@ -105,6 +108,31 @@ export class AppComponent implements OnInit {
     });
   }
 
+  submitContactForm() {
+    if (this.contactForm.valid) {
+      this.loading = true;
+      setTimeout(() => {
+        this.notificationService.push(
+          NOTIFICATION_TYPES.SUCCESS,
+          'Successfully submitted!'
+        );
+        this.contactForm.reset();
+        this.loading = false;
+      }, 2000);
+    } else if (isPlatformBrowser(this.platformId)) {
+      for (let control in this.contactForm.controls) {
+        if (this.contactForm.get(control)?.invalid) {
+          document.getElementById(`contact-${control}`)?.focus();
+          this.notificationService.push(
+            NOTIFICATION_TYPES.ERROR,
+            `Please fill out the focused field!`
+          );
+          break;
+        }
+      }
+    }
+  }
+
   /** Only call when current platform is browser */
   toggleModal() {
     const modal = this.modal.nativeElement;
@@ -112,22 +140,11 @@ export class AppComponent implements OnInit {
 
     if (display === 'none' || display === '') {
       modal.style.display = 'block';
+      document.body.style.overflowY = 'hidden';
     } else {
       modal.style.display = 'none';
+      document.body.style.overflowY = 'auto';
     }
-  }
-
-  toggleErrors(control: string): boolean | undefined {
-    const validations = {
-      quantity:
-        this.ticketBookerModalForm.get('quantity')?.dirty &&
-        this.ticketBookerModalForm.get('quantity')?.invalid,
-      email:
-        this.ticketBookerModalForm.get('email')?.dirty &&
-        this.ticketBookerModalForm.get('email')?.invalid,
-    };
-
-    return validations[control as keyof typeof validations];
   }
 
   submitTicketBooker() {
@@ -139,12 +156,17 @@ export class AppComponent implements OnInit {
           'Successfully submitted!'
         );
         this.ticketBookerModalForm.reset();
+        this.toggleModal();
         this.loading = false;
       }, 2000);
     } else if (isPlatformBrowser(this.platformId)) {
       for (let control in this.ticketBookerModalForm.controls) {
         if (this.ticketBookerModalForm.get(control)?.invalid) {
           document.getElementById(`${control}`)?.focus();
+          this.notificationService.push(
+            NOTIFICATION_TYPES.ERROR,
+            `Please fill out the focused field!`
+          );
           break;
         }
       }

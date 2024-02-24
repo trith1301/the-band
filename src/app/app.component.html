@@ -101,11 +101,52 @@
   </div>
 </div>
 
+<div id="contact" class="contact-area container">
+  <h2 class="contact-area-title">Contact</h2>
+  <p class="contact-area-slogan">Fan? Drop a note!</p>
+  <div class="contact-area-info">
+    <ul class="contact-area-info-lines">
+      <li><i class="bx bxs-map"></i><span>Chicago, US</span></li>
+      <li><i class="bx bxs-phone"></i><span>Phone: +00 151515</span></li>
+      <li>
+        <i class="bx bxs-envelope"></i><span>Email: mail&#64;mail.com</span>
+      </li>
+    </ul>
+    <form
+      id="contact-form"
+      class="contact-area-info-form"
+      [formGroup]="contactForm"
+      (submit)="submitContactForm()"
+    >
+      <input
+        id="contact-name"
+        formControlName="name"
+        type="text"
+        placeholder="Name"
+      />
+      <input
+        id="contact-email"
+        formControlName="email"
+        type="text"
+        placeholder="Email"
+      />
+      <input
+        id="contact-message"
+        class="full"
+        formControlName="message"
+        type="text"
+        placeholder="Message"
+      />
+      <button class="full" type="submit">Send</button>
+    </form>
+  </div>
+</div>
+
 <the-band-footer />
 
 <the-band-spinner [hidden]="!loading" />
 
-<div id="myModal" class="modal" #modal>
+<div id="myModal" class="modal" [style.zIndex]="zIndex" #modal>
   <div class="modal-content">
     <div class="modal-header">
       <span class="modal-header-cancel" (click)="toggleModal()">&times;</span>

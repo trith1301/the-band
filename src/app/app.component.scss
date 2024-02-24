@@ -285,3 +285,128 @@
     }
   }
 }
+
+.contact-area {
+  &-title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: map-get($font-weights, semi-bold);
+
+    color: map-get($colors, text-1);
+  }
+
+  &-slogan {
+    opacity: 0.6;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    font-style: italic;
+    text-align: center;
+
+    color: map-get($colors, text-1);
+  }
+
+  &-info {
+    display: grid;
+
+    padding-top: 32px;
+    padding-bottom: 32px;
+
+    &-lines {
+      list-style-type: none;
+
+      font-size: 18px;
+
+      i {
+        width: 30px;
+      }
+
+      @include respond-to(xs) {
+        margin-bottom: 16px;
+      }
+
+      @include respond-to(md) {
+        margin-bottom: 0;
+      }
+    }
+
+    &-form {
+      display: grid;
+      gap: 8px 16px;
+
+      width: 100%;
+
+      .full {
+        @include respond-to(xs) {
+          grid-column: unset;
+        }
+
+        @include respond-to(md) {
+          grid-column: span 2;
+        }
+      }
+
+      input {
+        display: block;
+
+        width: 100%;
+
+        padding: 8px;
+
+        border: 1px solid #ccc;
+
+        font-size: 15px;
+      }
+
+      button[type="submit"] {
+        cursor: pointer;
+
+        margin-top: 16px;
+        margin-bottom: 16px;
+
+        margin-left: auto;
+
+        padding: 8px 16px;
+
+        border: none;
+
+        text-transform: uppercase;
+
+        color: map-get($colors, text-0);
+        background-color: map-get($colors, background-1);
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      @include respond-to(xs) {
+        grid-template-columns: 1fr;
+
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      @include respond-to(md) {
+        grid-template-columns: 1fr 1fr;
+
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+    }
+
+    @include respond-to(xs) {
+      grid-template-columns: 1fr;
+    }
+
+    @include respond-to(md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
