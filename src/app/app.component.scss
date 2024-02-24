@@ -50,6 +50,14 @@
 
         font-size: 15px;
       }
+
+      @include respond-to(xs) {
+        display: none;
+      }
+
+      @include respond-to(md) {
+        display: block;
+      }
     }
   }
 }
