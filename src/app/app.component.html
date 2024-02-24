@@ -105,7 +105,7 @@
 
 <the-band-spinner [hidden]="!loading" />
 
-<div id="myModal" class="modal" #modal>
+<div id="myModal" class="modal" [style.zIndex]="zIndex" #modal>
   <div class="modal-content">
     <div class="modal-header">
       <span class="modal-header-cancel" (click)="toggleModal()">&times;</span>

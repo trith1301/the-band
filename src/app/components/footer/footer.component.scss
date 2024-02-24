@@ -1,7 +1,42 @@
 @import "../../../styles.scss";
 
+footer {
+  background-color: map-get($colors, background-0);
+}
+
 .footer-image {
   img {
     width: 100%;
+  }
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  opacity: 0.6;
+
+  padding: 64px 16px;
+
+  &-socials {
+    display: flex;
+    justify-content: center;
+    column-gap: 2px;
+
+    list-style-type: none;
+
+    li > a {
+      font-size: 24px;
+      text-decoration: none;
+    }
+  }
+
+  &-copyright {
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    font-size: 15px;
+    text-align: center;
   }
 }
