@@ -21,6 +21,7 @@ import 'swiper/css';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 import { Show, BandMember, ShowTickets, TicketDates } from './core/types';
 import { SHOWS, BAND_MEMBERS, SHOW_TICKETS, TICKET_DATES } from './core/data';
@@ -33,6 +34,7 @@ const imports = [
   // Components
   HeaderComponent,
   FooterComponent,
+  SpinnerComponent,
 ];
 
 @Component({
@@ -43,6 +45,7 @@ const imports = [
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  loading: boolean = false;
   shows: Show[] = [];
   bandMembers: BandMember[] = [];
   showTickets: ShowTickets[] = [];
@@ -103,6 +106,11 @@ export class AppComponent implements OnInit {
   }
 
   submitTicketBooker() {
-    console.log(this.ticketBookerModalForm.get('quantity')?.valid);
+    this.loading = true;
+
+    setTimeout(() => {
+      this.ticketBookerModalForm.reset();
+      this.loading = false;
+    }, 2000);
   }
 }
