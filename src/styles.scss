@@ -65,86 +65,259 @@ body {
   padding: 64px 16px;
 }
 
-/* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  z-index: 3;
+
+  overflow: auto;
+
+  position: fixed;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+
+  // display: none;
+
+  width: 100%;
+  height: 100%;
+
+  padding-top: 100px;
+
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Modal Content */
 .modal-content {
   position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
+
   width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -webkit-animation-name: animatetop;
+
+  margin: auto;
+
+  padding: 0;
+
+  border: 1px solid #888;
+
+  -webkit-animation-name: animateTop;
   -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
+  animation-name: animateTop;
   animation-duration: 0.4s;
-}
 
-/* Add Animation */
-@-webkit-keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
+  background-color: #fefefe;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-@keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
+  @include respond-to(xs) {
+    width: auto;
+    margin: 0 10px;
   }
-  to {
-    top: 0;
-    opacity: 1;
+
+  @include respond-to(md) {
+    width: 500px;
+    margin: auto;
   }
-}
 
-/* The Close Button */
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+  @include respond-to(lg) {
+    width: 900px;
+    margin: auto;
+  }
 }
 
 .modal-header {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 42px 16px;
+
+  color: map-get($colors, text-0);
+  background-color: #009688;
+
+  &-icon::before {
+    margin-right: 16px;
+
+    font-size: 30px;
+
+    color: map-get($colors, text-0) !important;
+  }
+
+  &-title {
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 4px;
+
+    color: map-get($colors, text-0);
+  }
+
+  &-cancel {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    cursor: pointer;
+
+    padding: 8px 16px;
+
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+
+    color: map-get($colors, text-0);
+
+    &:hover,
+    &:focus {
+      color: map-get($colors, text-1);
+      background-color: #ccc;
+    }
+  }
 }
 
 .modal-body {
   padding: 2px 16px;
+
+  .modal-body-form {
+    display: block;
+    &-group {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        margin-top: 15px;
+        margin-bottom: 15px;
+
+        font-size: 15px;
+      }
+
+      .input {
+        padding: 8px;
+        border: 1px solid #ccc;
+
+        &:focus-visible {
+          outline: -webkit-focus-ring-color auto 1px;
+        }
+      }
+
+      // Hide controls for type Number Inputs
+      .input[type="number"] {
+        /* Firefox */
+        -moz-appearance: textfield;
+
+        /* Chrome, Safari, Edge, Opera */
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          margin: 0;
+          -webkit-appearance: none;
+        }
+      }
+    }
+
+    &-submit {
+      display: block;
+
+      width: 100%;
+
+      cursor: pointer;
+
+      margin-top: 16px;
+      margin-bottom: 16px;
+
+      padding: 16px;
+
+      border: none;
+      outline: none;
+
+      font-size: 15px;
+      font-weight: map-get($font-weights, bold);
+      text-transform: uppercase;
+
+      color: map-get($colors, text-0);
+      background-color: #009688;
+
+      i {
+        color: map-get($colors, text-0);
+      }
+
+      &:hover {
+        color: map-get($colors, text-1);
+        background-color: #ccc;
+
+        i {
+          color: map-get($colors, text-1);
+        }
+      }
+    }
+  }
 }
 
 .modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px;
+
+  &-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    padding: 8px 16px;
+
+    border: none;
+
+    outline: none;
+
+    background-color: #f44336;
+
+    * {
+      font-weight: map-get($font-weights, bold);
+
+      color: map-get($colors, text-0);
+    }
+
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 18px;
+    }
+
+    &:hover {
+      color: map-get($colors, text-1);
+
+      background-color: #ccc;
+    }
+  }
+
+  &-help a {
+    font-size: 15px;
+    color: #2196f3;
+  }
+}
+
+@-webkit-keyframes animateTop {
+  from {
+    opacity: 0;
+
+    top: -300px;
+  }
+  to {
+    opacity: 1;
+
+    top: 0;
+  }
+}
+
+@keyframes animateTop {
+  from {
+    opacity: 0;
+
+    top: -300px;
+  }
+  to {
+    opacity: 1;
+    top: 0;
+  }
 }

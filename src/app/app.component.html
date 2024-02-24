@@ -106,15 +106,50 @@
 <div id="myModal" class="modal" #modal>
   <div class="modal-content">
     <div class="modal-header">
-      <span (click)="toggleModal()" class="close">&times;</span>
-      <h2>Tickets</h2>
+      <span class="modal-header-cancel" (click)="toggleModal()">&times;</span>
+      <i class="modal-header-icon bx bxs-shopping-bag-alt"></i>
+      <h2 class="modal-header-title">Tickets</h2>
     </div>
     <div class="modal-body">
-      <p>Some text in the Modal Body</p>
-      <p>Some other text...</p>
+      <form
+        class="modal-body-form"
+        [formGroup]="ticketBookerModalForm"
+        (submit)="submitTicketBooker()"
+      >
+        <div class="modal-body-form-group">
+          <label class="label" for="quantity"
+            ><i class="bx bxs-cart-alt"></i> Tickets, $15 Per Person</label
+          >
+          <input
+            class="input"
+            formControlName="quantity"
+            id="quantity"
+            type="number"
+            placeholder="How many?"
+          />
+        </div>
+        <div class="modal-body-form-group">
+          <label class="label" for="email"
+            ><i class="bx bxs-user"></i> Send To</label
+          >
+          <input
+            class="input"
+            formControlName="email"
+            id="email"
+            type="email"
+            placeholder="Enter email"
+          />
+        </div>
+        <button class="modal-body-form-submit" type="submit">
+          Pay <i class="bx bx-check"></i>
+        </button>
+      </form>
     </div>
     <div class="modal-footer">
-      <h3>Modal Footer</h3>
+      <button (click)="toggleModal()" class="modal-footer-close" type="button">
+        <span>Close</span><i class="bx bx-x"></i>
+      </button>
+      <p class="modal-footer-help">Need <a href="#">help?</a></p>
     </div>
   </div>
 </div>
